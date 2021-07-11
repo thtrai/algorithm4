@@ -12,24 +12,16 @@ def build_scoring_matrix(alphabet, diag_score, off_diag_score, dash_score):
 #    answer_dict  = dict()
 #    for character_i in alphabet:
 #        small_dict = dict()
-#
 #        for character_j in alphabet:
-#            print (character_j, character_j,'printer')
 #            if '_' in [character_j,character_i]:
 #                small_dict[character_i] = dash_score
-#                print('small',small_dict)
 #            elif character_i == character_j:
 #                small_dict[character_i] = diag_score
-#                print('small',small_dict)
 #            else:
 #                small_dict[character_i] = off_diag_score
-#                print('small',small_dict)
 #        answer_dict[character_i] = small_dict
 #
 #    return answer_dict
-#
-    for character_i in alphabet:
-        small = dict()
-        for character_j in alphabet:
-            print( character_i,character_j)
+    return None
+
 
