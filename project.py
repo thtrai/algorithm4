@@ -1,8 +1,7 @@
 """This is project for algorithmic thinking 2, week 4
 PYTHON3 is used."""
-example = "compute_alignment_matrix('A', 'A', {'A': {'A': 6, 'C': 2, '-': -4, 'T': 2, 'G': 2}, 'C': {'A': 2, 'C': 6, '-': -4, 'T': 2, 'G': 2}, '-': {'A': -4, 'C': -4, '-': -4, 'T': -4, 'G': -4}, 'T': {'A': 2, 'C': 2, '-': -4, 'T': 6, 'G': 2}, 'G': {'A': 2, 'C': 2, '-': -4, 'T': 2, 'G': 6}}, True) expected [[0, -4], [-4, 6]] but received [[0]] "
-example2 = "compute_alignment_matrix('AC','TAG','buildscoringmatrix')"
-scoring2 = "build_scoring_matrix(set(['A','T','G']),5,2,-4) " 
+
+example = "compute_global_alignment('ACTACT', 'GGACTGCTTCTGG', {'A': {'A': 2, 'C': 1, '-': 0, 'T': 1, 'G': 1}, 'C': {'A': 1, 'C': 2, '-': 0, 'T': 1, 'G': 1}, '-': {'A': 0, 'C': 0, '-': 0, 'T': 0, 'G': 0}, 'T': {'A': 1, 'C': 1, '-': 0, 'T': 2, 'G': 1}, 'G': {'A': 1, 'C': 1, '-': 0, 'T': 1, 'G': 2}}, [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [0, 1, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [0, 1, 2, 3, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6], [0, 1, 2, 4, 4, 6, 7, 7, 7, 7, 7, 7, 7, 7], [0, 1, 2, 4, 6, 6, 7, 9, 9, 9, 9, 9, 9, 9], [0, 1, 2, 4, 6, 8, 8, 9, 11, 11, 11, 11, 11, 11]]) #returned aligned y sequence does not include the entire original sequence: 'ACTGCTTCTGG' (11, '--A---CTACT--', 'GGACTGCTTCTGG') "
 
 def globalization(num, global_flag):
     """Helper function. It is the Question12 from Homework 4. It is used for 
@@ -76,3 +75,28 @@ def compute_alignment_matrix(seq_x, seq_y, scoring_matrix, global_flag):
                 matrix[index_i].append(max(max_list))
 
     return matrix
+
+
+def compute_global_alignment(seq_x, seq_y, scoring_matrix, alignment_matrix):
+    """Takes as input two sequences seq_x and seq_y whose elements share a common 
+    alphabet with the scoring matrix scoring_matrix. This function computes a global 
+    alignment of seq_x and seq_y using the global alignment matrix alignment_matrix.
+    The function returns a tuple of the form (score, align_x, align_y) where score is
+    the score of the global alignment align_x and align_y. Note that align_x and align_y
+    should have the same length and may include the padding character ’-’."""
+
+    length_i = len(seq_x)
+    length_j = len(seq_y)
+    secondary_x = set()
+    secondary_y = set()
+    
+    while length_i !=0 and length_j !=0:
+        if alignment_matrix[length_i][length_j] == alignment_matrix[length_i -1][length_j -1] +\
+        scoring_matrix[seq_x[length_i - 1]][seq_y[length_j - 1]]:
+
+
+
+
+
+            return 'helloworld'
+    return (0,'-','-')
