@@ -4,6 +4,13 @@ example = "compute_alignment_matrix('A', 'A', {'A': {'A': 6, 'C': 2, '-': -4, 'T
 example2 = "compute_alignment_matrix('AC','TAG','buildscoringmatrix')"
 scoring2 = "build_scoring_matrix(set(['A','T','G']),5,2,-4) " 
 
+def globalization(num, global_flag):
+    """Helper function. It is the Question12 from Homework 4. It is used for 
+    compute_alignment_matrix function."""
+    if num < 0 and not global_flag:
+        return 0
+    else:
+        return num
 
 def build_scoring_matrix(alphabet, diag_score, off_diag_score, dash_score):
     """Takes as input a set of characters alphabet and three scores
@@ -49,11 +56,11 @@ def compute_alignment_matrix(seq_x, seq_y, scoring_matrix, global_flag):
 
     for index_i in range(1,length_m + 1):
         dummy_si = matrix[index_i - 1][0] + scoring_matrix[seq_x[index_i - 1]]['-']  #S[i,0]
-        matrix.append([dummy_si])
+        matrix.append([globalization(dummy_si,global_flag)])
     
     for index_j in range(1,length_n + 1):
         dummy_sj = matrix[0][index_j - 1] + scoring_matrix[seq_y[index_j - 1]]['-']  #S[0,j]
-        matrix[0].append(dummy_sj)
+        matrix[0].append(globalization(dummy_sj,global_flag))
 
     for index_i in range(1,length_m + 1):
         for index_j in range(1,length_n + 1):
@@ -61,7 +68,11 @@ def compute_alignment_matrix(seq_x, seq_y, scoring_matrix, global_flag):
             max_list.append(matrix[index_i - 1][index_j -1] + scoring_matrix[seq_x[index_i - 1]][seq_y[index_j -1]])
             max_list.append(matrix[index_i - 1][index_j] + scoring_matrix[seq_x[index_i - 1]]['-'])
             max_list.append(matrix[index_i][index_j -1] + scoring_matrix[seq_y[index_j - 1]]['-'])
+            
 
-            matrix[index_i].append(max(max_list))
+            if not global_flag and max(max_list) < 0:
+                matrix[index_i].append(0)
+            else:
+                matrix[index_i].append(max(max_list))
 
     return matrix
