@@ -94,21 +94,21 @@ def compute_global_alignment(seq_x, seq_y, scoring_matrix, alignment_matrix):
         if alignment_matrix[length_i][length_j] == alignment_matrix[length_i -1][length_j -1] +\
         scoring_matrix[seq_x[length_i - 1]][seq_y[length_j - 1]]:
             #lines 1,2
-            secondary_x += seq_x[length_i - 1]
-            secondary_y += seq_y[length_j - 1]
+            secondary_x = seq_x[length_i -1] + secondary_x
+            secondary_y = seq_y[length_i -1] + secondary_y
             length_i -= 1
             length_j -= 1
         else:
             if alignment_matrix[length_i][length_j] == alignment_matrix[length_i -1][length_j] +\
             scoring_matrix[seq_x[length_i -1]]['-']:
                 #lines 3,4
-                secondary_x += seq_x[length_i - 1]
-                secondary_y += '-'
+                secondary_x = seq_x[length_i -1] + secondary_x
+                secondary_y = '-' + secondary_y
                 length_i -= 1
             else:
                 #lines 5,6
-                secondary_x += '-'
-                secondary_y += seq_y[length_i - 1]
+                secondary_x = '-' + secondary_x
+                secondary_y = seq_y[length_i -1] + secondary_y
                 length_j -= 1
     while length_i != 0:
         secondary_x = seq_x[length_i -1] + secondary_x
