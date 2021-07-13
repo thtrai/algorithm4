@@ -119,5 +119,8 @@ def compute_global_alignment(seq_x, seq_y, scoring_matrix, alignment_matrix):
         secondary_x = '-' + secondary_x
         secondary_y = seq_y[length_j -1] + secondary_y
         length_j -= 1
+    
+    score = alignment_matrix[-1][-1] 
 
-    return (0,secondary_x,secondary_y)
+
+    return (score,secondary_x,secondary_y)
