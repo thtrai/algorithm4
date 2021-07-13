@@ -102,7 +102,7 @@ def compute_global_alignment(seq_x, seq_y, scoring_matrix, alignment_matrix):
             if alignment_matrix[length_i][length_j] == alignment_matrix[length_i -1][length_j] +\
             scoring_matrix[seq_x[length_i -1]]['-']:
                 #lines 3,4
-                secondary_x = seq_x[length_i - 1] + secondary_x
+                 secondary_x = seq_x[length_i - 1] + secondary_x
                 secondary_y = '-' + secondary_y
                 length_i -= 1
             else:
@@ -124,3 +124,14 @@ def compute_global_alignment(seq_x, seq_y, scoring_matrix, alignment_matrix):
 
 
     return (score,secondary_x,secondary_y)
+
+
+def compute_local_alignment(seq_x, seq_y, scoring_matrix, alignment_matrix):
+    """Takes as input two sequences seq_x and seq_y whose elements share a 
+    common alphabet with the scoring matrix scoring_matrix. This function 
+    computes a local alignment of seq_x and seq_y using the local alignment 
+    matrix alignment_matrix.The function returns a tuple of the form 
+    (score, align_x, align_y) where score is the score of the optimal local 
+    alignment align_x and align_y. Note that align_x and align_y should have
+    the same length and may include the padding character ’-’."""
+
