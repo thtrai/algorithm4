@@ -184,8 +184,9 @@ def compute_local_alignment(seq_x, seq_y, scoring_matrix, alignment_matrix):
     secondary_x = ''
     secondary_y = ''
 
+    ####find the indices of the (and the) maximum number in the alignment_matrix####
     maxi = float('-inf')
-    for matrix_list in alignment_matrix:
+    for number, matrix_list in enumerate(alignment_matrix):  ###CONTINUE HERE
         dummy_max = max(matrix_list)
         if dummy_max > maxi:
             maxi = dummy_max
