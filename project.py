@@ -81,7 +81,7 @@ def compute_global_alignment(seq_x, seq_y, scoring_matrix, alignment_matrix):
     alignment of seq_x and seq_y using the global alignment matrix alignment_matrix.
     The function returns a tuple of the form (score, align_x, align_y) where score is
     the score of the global alignment align_x and align_y. Note that align_x and align_y
-    should have the same length and may include the padding character ’-’."""
+    should have the same length and may include the padding character '-'."""
 
     length_i = len(seq_x)
     length_j = len(seq_y)
@@ -131,7 +131,7 @@ def compute_local_alignment(seq_x, seq_y, scoring_matrix, alignment_matrix):
     matrix alignment_matrix.The function returns a tuple of the form 
     (score, align_x, align_y) where score is the score of the optimal local 
     alignment align_x and align_y. Note that align_x and align_y should have
-    the same length and may include the padding character ’-’."""
+    the same length and may include the padding character '-'."""
 
     secondary_x = ''
     secondary_y = ''
