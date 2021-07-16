@@ -114,3 +114,44 @@ def question4():
     plt.title('Distribution of generate_null_distribution of 2 proteins')
     plt.legend()
     plt.show()
+
+    return human_fruit_rdict
+    ###answer:
+    """#human_fruit_rdict = {56: 52, 58: 28, 49: 71, 45: 49, 65: 6, 57: 35, 46: 58, 61: 15, 48: 52, 
+    44: 43, 53: 43, 41: 8, 50: 76, 59: 17, 55: 41, 47: 83, 54: 43, 51: 59, 52: 56, 62: 12, 39: 7, 
+    42: 22, 43: 37, 68: 2, 40: 2, 69: 6, 64: 13, 60: 13, 67: 6, 63: 11, 79: 1, 80: 2, 76: 1, 72: 2, 
+    75: 1, 71: 8, 66: 10, 74: 3, 78: 1, 73: 2, 38: 1, 77: 1, 89: 1} """
+    
+
+def question5():
+
+    #human_fruit_rdict  = question4()  ####OR
+    ###take from the example above the solution
+    human_fruit_rdict = {56: 52, 58: 28, 49: 71, 45: 49, 65: 6, 57: 35, 46: 58, 61: 15, 48: 52, 44: 43, 53: 43, 41: 8, 50: 76, 59: 17, 55: 41, 47: 83, 54: 43, 51: 59, 52: 56, 62: 12, 39: 7, 42: 22, 43: 37, 68: 2, 40: 2, 69: 6, 64: 13, 60: 13, 67: 6, 63: 11, 79: 1, 80: 2, 76: 1, 72: 2, 75: 1, 71: 8, 66: 10, 74: 3, 78: 1, 73: 2, 38: 1, 77: 1, 89: 1}
+
+    mean = 0
+    for key,value in human_fruit_rdict.items():
+            mean += key*value
+
+    num_trials = sum(human_fruit_rdict.values())
+
+    mean = mean/float(num_trials)
+
+
+    deviation = 0
+    for key,value  in human_fruit_rdict.items():
+        for dummy_index in range(value):
+            deviation += (key-mean) ** 2
+
+    deviation = deviation / float(num_trials)
+    deviation = deviation ** 0.5
+
+    ### from question1 the s score (local alignment for the human eyeless protein and the 
+    #fruitfly eyeless protein, is 875.
+
+    s = 875
+    z_score = (s - mean) / float(deviation)
+
+    return (mean, deviation, z_score)
+
+    
