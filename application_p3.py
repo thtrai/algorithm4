@@ -1,4 +1,4 @@
-import provided 
+import provided_p3
 import project as p
 import random
 from matplotlib import pyplot as plt
@@ -35,9 +35,9 @@ def generate_null_distribution(seq_x, seq_y, scoring_matrix, num_trials):
 #### END OF HELPER FUNCTIONS #########
 ###question 1
 
-human_protein = provided.read_protein(provided.HUMAN_EYELESS_URL)
-fruitfly_protein = provided.read_protein(provided.FRUITFLY_EYELESS_URL)
-pam_score = provided.read_scoring_matrix(provided.PAM50_URL)
+human_protein = provided_p3.read_protein(provided_p3.HUMAN_EYELESS_URL)
+fruitfly_protein = provided_p3.read_protein(provided_p3.FRUITFLY_EYELESS_URL)
+pam_score = provided_p3.read_scoring_matrix(provided_p3.PAM50_URL)
     
 def  question1():
     pam_alignment = p.compute_alignment_matrix(human_protein,fruitfly_protein,pam_score,False)
@@ -48,7 +48,7 @@ def  question1():
 
 #####question2
 
-consensus_pax = provided.read_protein(provided.CONSENSUS_PAX_URL)
+consensus_pax = provided_p3.read_protein(provided_p3.CONSENSUS_PAX_URL)
 
 def question2():
     #take these from previous answer
@@ -95,11 +95,15 @@ def question3():
 
 def question4():
     human_fruit_rdict = generate_null_distribution(human_protein, fruitfly_protein, pam_score, 1000)
-    x_scores = human_fruit_rdict.values()
-    y_times =  human_fruit_rdict.keys()
+    #return human_fruit_rdict
+    x_scores = human_fruit_rdict.keys()
+    y_times =  human_fruit_rdict.values()
+
+
 
     y_fraction =  []
-    total = len(x_scores)
+    total = sum(y_times)
+    print('total is ',total)
     for times in y_times:
         y_fraction.append(times/float(total))
 
@@ -108,4 +112,5 @@ def question4():
     plt.xlabel('Local score')
     plt.ylabel('Percentage of the score')
     plt.title('Distribution of generate_null_distribution of 2 proteins')
+    plt.legend()
     plt.show()
