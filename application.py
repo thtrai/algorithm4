@@ -1,5 +1,6 @@
 import provided 
 import project as p
+import random
 #### HELPER FUNCTIONS ######
 
 
@@ -13,6 +14,15 @@ def similarity_percent(string1, string2):
 
     answer = similar/float(total)
     print('the similarity between ',string1,' and ',string2,' is :',answer)
+
+
+def generate_null_distribution(seq_x, seq_y, scoring_matrix, num_trials):
+
+
+
+
+
+
 
 #### END OF HELPER FUNCTIONS #########
 ###question 1
@@ -56,3 +66,23 @@ def question2():
     #print(fruit_consensus_global)
 
     similarity_percent(fruit_consensus_global[1],fruit_consensus_global[2])
+
+def question3():
+    repetitions = 10
+    amino_acids = "ACBEDGFIHKMLNQPSRTWVYXZ"
+    human_local = 'HSGVNQLGGVFVNGRPLPDSTRQKIVELAHSGARPCDISRILQVSNGCVSKILGRYYETGSIRPRAIGGSKPRVATPEVVSKIAQYKRECPSIFAWEIRDRLLSEGVCTNDNIPSVSSINRVLRNLASEKQQ'
+    comparison_string = human_local
+
+    for _ in range(repetitions):
+        random_acid = ''
+        for __ in range(len(comparison_string)):
+            random_acid += random.choice(amino_acids)
+
+        similarity_percent(random_acid,comparison_string)
+    #######answer:
+    #running tests forming a random string of acids of the same length as human_local protein
+    #the similarity between the two is below 10%. So, a high similarity such as 70% (as question2)
+    #shows as that the two proteins are not irrelevant. They come from a common ansestor
+
+
+def question3()
