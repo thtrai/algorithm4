@@ -30,6 +30,20 @@ def generate_null_distribution(seq_x, seq_y, scoring_matrix, num_trials):
     return scoring_distribution
 
 
+def check_spelling(checked_word, dist, word_list):
+    answer_list = []
+    for second_word in word_list:
+        alphabet = set(checked_word).union(set(second_word))
+        scoring_matrix = p.build_scoring_matrix(alphabet, 2,1,0)
+        alignment_matrix = p.compute_alignment_matrix(checked_word, second_word, scoring_matrix, True)
+        score = p.compute_global_alignment(checked_word, second_word, scoring_matrix, alignment_matrix)[1]
+        
+        if score <= dist:
+            answer_list.append(second_word)
+
+
+    return answer_list
+
 
 
 #### END OF HELPER FUNCTIONS #########
@@ -154,4 +168,29 @@ def question5():
 
     return (mean, deviation, z_score)
 
+
+def question6():
+    phrase = 'winning the jackpot of an extremely large prize pool (as the example) is 99999 * 180 * 10 = 179998200. 3tickets(max) at 179998200 tickets total is 3/179998200 = 1.6666833335000018e-08.  The z_score shows us that the chance of 875 score is 118 times away standard deviation. Winning the lottery is more likely to happen than the similarity between the two proteins have happened by chance.'
+
+    print(phrase)
+
+
     
+def question7():
+    phrase = """If the two words identical, |x| + |y| - score = edit. But x=y, so 2|x| -score = edit.
+    But edit = 0, so 2|x| = score. But score = diag * |x|. So, 2|x| = |x|*diag => diag=2.
+    Next suppose x and y have only one letter different.
+    |x| + |y| - score = edit. But edit = 1, because only one letter is different. So
+    |x| + |y| - score = 1. But |x| = |y|. So, 2|x| - score = 1. Score is (len(x) -1) * 2 + off_diag.
+    So  ...."""
+
+    print(phrase)
+
+
+
+
+def question8():
+    word_list =  ###CONTINUE HERE
+
+
+
