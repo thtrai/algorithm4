@@ -1,7 +1,10 @@
 import provided_p3
 import project as p
 import random
+import urllib.request
 from matplotlib import pyplot as plt
+WORDLIST_URL = 'http://storage.googleapis.com/codeskulptor-assets/assets_scrabble_words3.txt' 
+
 #### HELPER FUNCTIONS ######
 
 
@@ -31,14 +34,20 @@ def generate_null_distribution(seq_x, seq_y, scoring_matrix, num_trials):
 
 
 def check_spelling(checked_word, dist, word_list):
+    length_first = len(checked_word)
     answer_list = []
     for second_word in word_list:
+        #print('second',second_word)
         alphabet = set(checked_word).union(set(second_word))
+        #print('alpha',alphabet)
         scoring_matrix = p.build_scoring_matrix(alphabet, 2,1,0)
+        #print('scorematrix',scoring_matrix)
         alignment_matrix = p.compute_alignment_matrix(checked_word, second_word, scoring_matrix, True)
-        score = p.compute_global_alignment(checked_word, second_word, scoring_matrix, alignment_matrix)[1]
+        #print('alimatri',alignment_matrix)
+        score = p.compute_global_alignment(checked_word, second_word, scoring_matrix, alignment_matrix)[0]
+        edit_score = length_first + len(second_word) - score
         
-        if score <= dist:
+        if edit_score <= dist:
             answer_list.append(second_word)
 
 
@@ -182,7 +191,8 @@ def question7():
     Next suppose x and y have only one letter different.
     |x| + |y| - score = edit. But edit = 1, because only one letter is different. So
     |x| + |y| - score = 1. But |x| = |y|. So, 2|x| - score = 1. Score is (len(x) -1) * 2 + off_diag.
-    So  ...."""
+    So  ....
+    offdiag = 1 and dashscore = 0"""
 
     print(phrase)
 
@@ -190,7 +200,16 @@ def question7():
 
 
 def question8():
-    word_list =  ###CONTINUE HERE
+    wordfile = urllib.request.urlopen(WORDLIST_URL)
+    print('loaded file')
+    data = wordfile.readlines()
+    word_list = [word.decode().strip() for word in data]
+    wordfile.close()
+    print('created list with',len(word_list),'elements')
+ 
+    print(check_spelling('humble',1,word_list))
+    print(check_spelling('firefly',2,word_list))
+    return None
 
 
 
